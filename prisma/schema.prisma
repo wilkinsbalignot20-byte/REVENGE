@@ -1,0 +1,13 @@
+ datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Iwanan lang sa ilalim ang iyong mga models...
+model User {
+  id    String @id @default(uuid())
+  email String @unique
+}

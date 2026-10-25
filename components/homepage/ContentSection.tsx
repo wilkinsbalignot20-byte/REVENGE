@@ -2,10 +2,10 @@
 
 const SERIF = "var(--font-serif), 'Newsreader', Georgia, serif";
 
-/* Pinasimpleng brand icons. Palitan ng official SVG assets kung meron ka. */
+/* Pinasimpleng brand icons na may pinagandang sukat at kulay */
 function ShopeeIcon() {
   return (
-    <svg width="22" height="24" viewBox="0 0 22 24" fill="none" aria-hidden>
+    <svg width="24" height="24" viewBox="0 0 22 24" fill="none" aria-hidden>
       <path d="M2 7h18l-1.2 14a2 2 0 0 1-2 1.8H5.2a2 2 0 0 1-2-1.8L2 7z" fill="#EE4D2D" />
       <path d="M7 7a4 4 0 0 1 8 0" stroke="#EE4D2D" strokeWidth="1.8" fill="none" />
       <text x="11" y="19" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fff" fontFamily="Arial">S</text>
@@ -14,7 +14,7 @@ function ShopeeIcon() {
 }
 function ShopifyIcon() {
   return (
-    <svg width="22" height="24" viewBox="0 0 22 24" fill="none" aria-hidden>
+    <svg width="24" height="24" viewBox="0 0 22 24" fill="none" aria-hidden>
       <path d="M3 7h16l-1.2 14a2 2 0 0 1-2 1.8H6.2a2 2 0 0 1-2-1.8L3 7z" fill="#95BF47" />
       <path d="M7.5 7a3.5 3.5 0 0 1 7 0" stroke="#5E8E3E" strokeWidth="1.8" fill="none" />
       <text x="11" y="19" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fff" fontFamily="Arial">S</text>
@@ -41,15 +41,15 @@ function MessengerIcon() {
 
 const SOURCES = [
   { name: "Shopee", color: "#EE4D2D", Icon: ShopeeIcon },
-  { name: "Shopify", color: "#5E8E3E", Icon: ShopifyIcon },
-  { name: "Lazada", color: "#2E2BA0", Icon: LazadaIcon },
-  { name: "Messenger", color: "#0A7CFF", Icon: MessengerIcon },
+  { name: "Shopify", color: "#477332", Icon: ShopifyIcon }, // Ginawang mas madilim ng konti para madaling basahin
+  { name: "Lazada", color: "#1A1580", Icon: LazadaIcon }, // Pinagandang tono ng asul
+  { name: "Messenger", color: "#0062D1", Icon: MessengerIcon },
 ];
 
 export default function ContentSection() {
   return (
     <>
-      {/* Glow sa gitna (nasa ilalim ng curve at pills) */}
+      {/* Glow sa gitna */}
       <div className="absolute left-[470px] top-[300px] w-[560px] h-[500px] bg-[#0E9770] rounded-full blur-[180px] pointer-events-none z-[5] opacity-60" />
 
       {/* M logo */}
@@ -70,25 +70,42 @@ export default function ContentSection() {
         <span className="font-semibold text-[#08936C]">reflection for customers—</span>
       </p>
 
-      {/* SOURCE panel: curved top-left corner, bukas pababa at pakanan */}
-      <div className="absolute left-[1185px] top-[708px] w-[1000px] h-[316px] z-20">
-        <span className="absolute left-[56px] top-[14px] font-outfit font-normal text-[24px] leading-[30px] tracking-wide text-black">
-          SOURCE -
-        </span>
+      {/* 
+        BAGONG GLASSMORPHISM FLOATING CARD FOR SOURCES
+        - Binago ang simpleng text at ginawang eleganteng glass container.
+        - Gumamit ng backdrop-blur at banayad na shadow para maging mukhang premium.
+      */}
+      <div className="absolute left-[990px] top-[780px] w-[420px] bg-white/40 backdrop-blur-xl border border-white/60 rounded-[28px] p-6 shadow-xl z-20">
+        
+        {/* Header Title sa loob ng card */}
+        <div className="mb-4">
+          <h3 className="font-outfit font-semibold text-[13px] tracking-widest text-black/40 uppercase">
+            Supported Integrations
+          </h3>
+          <p className="font-outfit font-medium text-[16px] text-black/80 mt-0.5">
+            Connect your favorite stores
+          </p>
+        </div>
 
-        <ul className="absolute left-[40px] top-[74px] flex flex-col gap-[16px]">
+        {/* Grid ng mga Brand Sources */}
+        <div className="grid grid-cols-2 gap-3 mt-4">
           {SOURCES.map(({ name, color, Icon }) => (
-            <li key={name} className="flex items-center gap-[10px]">
-              <Icon />
+            <div 
+              key={name} 
+              className="flex items-center gap-[12px] bg-white/60 border border-white/40 rounded-[18px] p-3 hover:bg-white/80 transition-all duration-200 cursor-pointer shadow-sm group"
+            >
+              <div className="flex-shrink-0 group-hover:scale-110 transition-transform duration-200">
+                <Icon />
+              </div>
               <span
-                className="font-outfit font-medium text-[19px] leading-[26px]"
+                className="font-outfit font-semibold text-[15px] tracking-tight"
                 style={{ color }}
               >
                 {name}
               </span>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </>
   );

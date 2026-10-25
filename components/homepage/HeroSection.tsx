@@ -9,10 +9,14 @@ export default function HeroSection() {
     <section className="relative min-h-[65vh] bg-[#067656] text-white pt-24 pb-10 overflow-hidden flex items-center">
       <Navbar />
 
-      <div className="mx-auto w-full max-w-[1200px] px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center z-20">
+      {/* 
+        Pinalitan ang dating grid-cols-12; Ginawa na lang nating flex layout 
+        para sa teksto sa kaliwa, habang ang 3D animation box ay naka-absolute sa ilalim.
+      */}
+      <div className="relative mx-auto w-full max-w-[1200px] px-12 z-20">
         
-        {/* KALIWANG BAHAGI (60% ng lapad): Teksto at Buttons */}
-        <div className="lg:col-span-7 flex flex-col items-start">
+        {/* KALIWANG BAHAGI: Teksto at Buttons */}
+        <div className="w-full lg:w-[60%] flex flex-col items-start">
           
           {/* Badge - Mas maliit na text at taas */}
           <div className="h-[32px] flex items-center bg-white/10 border border-white/20 rounded-[30px] px-[12px]">
@@ -75,10 +79,14 @@ export default function HeroSection() {
 
         </div>
 
-        {/* KANANG BAHAGI (40% ng lapad): Lalagyan ng iyong 3D Animation */}
-        <div className="lg:col-span-5 w-full flex justify-center items-center">
-          {/* Pinaliit din ang max-w ng 3D box para sumakto sa slim layout */}
-          <div className="w-full aspect-[4/3] max-w-[340px] border border-white/10 rounded-[24px] bg-white/5 backdrop-blur-md flex items-center justify-center p-4 shadow-xl">
+        {/* 
+          BAGONG PESTO NG KAHON: Naka-absolute na ito para mailagay natin sa gitna.
+          - `lg:absolute`: Gagana lang ang absolute positioning sa desktop screen.
+          - `lg:right-[15%] lg:top-[50%] lg:-translate-y-1/2`: Inilagay sa gitnang-kanang bahagi para pumasok sa blangkong espasyo.
+        */}
+        <div className="mt-10 lg:mt-0 w-full lg:w-auto lg:absolute lg:right-[28%] lg:top-[100%] lg:-translate-y-1/2 flex justify-center items-center">
+          {/* Napanatili ang styling ng iyong glassmorphism box */}
+          <div className="w-full sm:w-[340px] aspect-[4/3] border border-white/10 rounded-[24px] bg-white/5 backdrop-blur-md flex items-center justify-center p-4 shadow-xl">
             <span className="text-white/30 text-[12px] font-medium tracking-wide text-center">
               [ ILAGAY ANG IYONG 3D ANIMATION DITO ]
             </span>

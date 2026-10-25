@@ -1,6 +1,7 @@
  import React from "react";
-import { cacheLife } from "next/cache"; // Inimport ang cacheLife para sa Next.js 16 cache
+import { cacheLife } from "next/cache";
 import { Reveal, TiltCard } from "./Motion";
+import ClientBackground from "./ClientBackground"; // Inimport ang bagong wrapper
 
 const SERIF = "var(--font-serif), 'Newsreader', Georgia, serif";
 
@@ -26,31 +27,36 @@ const STATS = [
   { v: "24/7", l: "Store uptime" },
 ];
 
-// Gumawa ng cached function para ligtas na makuha ang kasalukuyang taon sa prerendering
 async function getCurrentYear() {
   "use cache";
-  cacheLife("max"); // Ibe-bake nito ang taon sa static HTML habang nagbi-build
+  cacheLife("max");
   return new Date().getFullYear();
 }
 
-// Ginawang `async` function ang component para magamit ang `await` sa itaas
 export default async function MoreSections() {
-  const currentYear = await getCurrentYear(); // Tinawag ang cached function
+  const currentYear = await getCurrentYear();
 
   return (
-    <div className="bg-[#EEF2F0] text-[#0D0B0B] font-outfit">
+    /* Pinalitan ang bg-[#EEF2F0] ng bg-[#0A0D0C] (Elegant dark green-charcoal background) */
+    /* Pinalitan ang text-[#0D0B0B] ng text-white para lalong lumutang ang mga detalye */
+    <div className="relative bg-[#0A0D0C] text-white font-outfit overflow-hidden w-full">
+      
+      {/* Ligtas na ipinasok ang Client Component sa background layer */}
+      <ClientBackground />
+
       {/* Stats */}
-      <section className="mx-auto max-w-[1200px] px-6 py-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+      <section className="relative z-10 mx-auto max-w-[1200px] px-6 py-16 grid grid-cols-2 md:grid-cols-4 gap-6">
         {STATS.map((s, i) => (
           <Reveal key={s.l} delay={i * 0.08} className="text-center">
             <div className="text-[44px] leading-none text-[#067656]" style={{ fontFamily: SERIF }}>{s.v}</div>
-            <div className="mt-2 text-[15px] text-black/60">{s.l}</div>
+            {/* Pinalitan ang text-black/60 ng text-white/60 para madaling basahin sa madilim na background */}
+            <div className="mt-2 text-[15px] text-white/60">{s.l}</div>
           </Reveal>
         ))}
       </section>
 
       {/* Features */}
-      <section id="features" className="mx-auto max-w-[1200px] px-6 py-16">
+      <section id="features" className="relative z-10 mx-auto max-w-[1200px] px-6 py-16">
         <Reveal>
           <p className="text-[14px] tracking-widest text-[#067656] font-medium">FEATURES</p>
           <h2 className="mt-3 text-[40px] leading-tight max-w-[640px]" style={{ fontFamily: SERIF }}>
@@ -60,10 +66,12 @@ export default async function MoreSections() {
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((f, i) => (
             <Reveal key={f.title} delay={i * 0.07}>
-              <TiltCard className="h-full rounded-[24px] bg-white/80 border border-black/10 p-7 shadow-[0_8px_30px_rgba(6,118,86,0.08)]">
+              {/* Pinalitan ang bg-white/70 ng glassmorphic bg-white/5 at ginawang border-white/10 para lutang ang ghost fibers */}
+              <TiltCard className="h-full rounded-[24px] bg-white/5 border border-white/10 p-7 shadow-[0_8px_30px_rgba(6,118,86,0.03)] backdrop-blur-sm">
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#067656]/10 text-[24px]">{f.icon}</div>
                 <h3 className="mt-5 text-[20px] font-semibold">{f.title}</h3>
-                <p className="mt-2 text-[16px] leading-[24px] text-black/65">{f.text}</p>
+                {/* Pinalitan ang text-black/65 ng text-white/70 */}
+                <p className="mt-2 text-[16px] leading-[24px] text-white/70">{f.text}</p>
               </TiltCard>
             </Reveal>
           ))}
@@ -71,7 +79,7 @@ export default async function MoreSections() {
       </section>
 
       {/* How it works */}
-      <section id="how" className="bg-[#067656] text-white">
+      <section id="how" className="relative z-10 text-white">
         <div className="mx-auto max-w-[1200px] px-6 py-20">
           <Reveal>
             <p className="text-[14px] tracking-widest text-white/70 font-medium">HOW IT WORKS</p>
@@ -92,7 +100,7 @@ export default async function MoreSections() {
       </section>
 
       {/* CTA */}
-      <section className="mx-auto max-w-[1200px] px-6 py-20">
+      <section className="relative z-10 mx-auto max-w-[1200px] px-6 py-20">
         <Reveal>
           <div className="rounded-[32px] bg-[#0D0B0B] px-8 py-16 text-center text-white">
             <h2 className="mx-auto max-w-[620px] text-[40px] leading-tight" style={{ fontFamily: SERIF }}>
@@ -112,18 +120,18 @@ export default async function MoreSections() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-black/10">
-        <div className="mx-auto flex max-w-[1200px] flex-col items-center justify-between gap-4 px-6 py-8 text-[14px] text-black/60 md:flex-row">
-          <span className="text-[20px] font-semibold text-black">
+      {/* Pinalitan ang border-black/10 ng border-white/10 at inayos ang mga text categories */}
+      <footer className="relative z-10 border-t border-white/10">
+        <div className="mx-auto flex max-w-[1200px] flex-col items-center justify-between gap-4 px-6 py-8 text-[14px] text-white/60 md:flex-row">
+          <span className="text-[20px] font-semibold text-white">
             MAN<span className="text-[#067656]">IPU</span>/
           </span>
           <nav className="flex gap-6">
-            <a href="#features" className="hover:text-black">Features</a>
-            <a href="#how" className="hover:text-black">How it works</a>
-            <a href="#" className="hover:text-black">Privacy</a>
-            <a href="#" className="hover:text-black">Terms</a>
+            <a href="#features" className="hover:text-white text-white/70 transition-colors">Features</a>
+            <a href="#how" className="hover:text-white text-white/70 transition-colors">How it works</a>
+            <a href="#" className="hover:text-white text-white/70 transition-colors">Privacy</a>
+            <a href="#" className="hover:text-white text-white/70 transition-colors">Terms</a>
           </nav>
-          {/* Ginamit ang ligtas na `currentYear` variable dito */}
           <span>© {currentYear} Manipu. Made in the Philippines 🇵🇭</span>
         </div>
       </footer>

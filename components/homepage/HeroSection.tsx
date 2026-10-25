@@ -1,31 +1,51 @@
  import React from "react";
 import Navbar from "./Navbar";
+import Image from "next/image"; // Siguraduhing naka-import ito para sa optimized image loading
 
 const SERIF = "var(--font-serif), 'Newsreader', Georgia, serif";
 
 export default function HeroSection() {
   return (
-    // Pinaliit ang min-h patungong 65vh at pt-24 para maging mas mababa ang kabuuang taas ng section
+    // Nananatiling relative ang section para magsilbing anchor ng kuneho
     <section className="relative min-h-[65vh] bg-[#067656] text-white pt-24 pb-10 overflow-hidden flex items-center">
       <Navbar />
 
       {/* 
-        Pinalitan ang dating grid-cols-12; Ginawa na lang nating flex layout 
-        para sa teksto sa kaliwa, habang ang 3D animation box ay naka-absolute sa ilalim.
+        ========================================================================
+        KUNEHO MULA SA CLOUDINARY (BACKGROUND LAYER)
+        - `z-0`: Inilalagay nito ang kuneho sa pinakalikod ng mga teksto.
+        - `pointer-events-none`: Para hindi nito maharangan ang pag-click sa mga button.
+        - Palitan ang `YOUR_CLOUD_NAME` at `your-bunny-asset-id` ng tunay mong Cloudinary details.
+        ========================================================================
       */}
-      <div className="relative mx-auto w-full max-w-[1200px] px-12 z-20">
+      <div className="absolute left-[8%] md:left-[12%] top-[25%] md:top-[20%] z-0 pointer-events-none w-[280px] sm:w-[350px] md:w-[420px] aspect-square opacity-80">
+        <Image
+          src="https://res.cloudinary.com/nresxj0f/image/upload/v1792920525/bunny1.png"
+          alt="Cloudinary Bunny Background"
+          fill
+          priority
+          sizes="(max-w-768px) 280px, (max-w-1024px) 350px, 420px"
+          className="object-contain object-left-top"
+        />
+      </div>
+
+      {/* 
+        TEXT AT CONTENT LAYER
+        - Tinaasan natin ang `z-index` papuntang `z-10` para siguradong nakalutang sa harap ng kuneho.
+      */}
+      <div className="relative mx-auto w-full max-w-[1200px] px-12 z-10">
         
         {/* KALIWANG BAHAGI: Teksto at Buttons */}
         <div className="w-full lg:w-[60%] flex flex-col items-start">
           
-          {/* Badge - Mas maliit na text at taas */}
+          {/* Badge */}
           <div className="h-[32px] flex items-center bg-white/10 border border-white/20 rounded-[30px] px-[12px]">
             <span className="font-outfit text-[13px] text-white tracking-wide">
               Built for Filipino merchants
             </span>
           </div>
 
-          {/* Headline - Sobrang binawasan ang laki mula sa dating higante */}
+          {/* Headline */}
           <div className="mt-4 w-full max-w-[580px]">
             <h1 className="flex flex-wrap items-baseline gap-x-2 gap-y-1 leading-none">
               <span className="font-outfit font-semibold text-[22px] sm:text-[26px] text-white tracking-tight">
@@ -42,19 +62,19 @@ export default function HeroSection() {
               </span>
             </h1>
 
-            {/* Subtext - Mas siksik na font at margin */}
+            {/* Subtext */}
             <p className="font-outfit font-light text-[14px] sm:text-[15px] leading-[22px] text-white/70 mt-3 max-w-[420px]">
               Manipu gives you a fully working online store to build and design
               your product —
             </p>
           </div>
 
-          {/* Action Buttons - Mas mababa ang taas ([40px] kumpara sa dating [52px]) */}
+          {/* Action Buttons */}
           <div className="mt-6 flex flex-wrap gap-3">
             {/* CTA: Get Started */}
             <button
               type="button"
-              className="h-[40px] px-4 flex items-center gap-[8px] bg-[#067656]/[0.75] border border-black/60 rounded-[39px] hover:bg-[#067656] transition-colors"
+              className="h-[40px] px-4 flex items-center gap-[8px] bg-[#067656]/[0.75] border border-black/60 rounded-[39px] hover:bg-[#067656] transition-colors cursor-pointer"
             >
               <span className="font-outfit font-semibold text-[14px] text-white">Get Started</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -66,7 +86,7 @@ export default function HeroSection() {
             {/* CTA: Our Product */}
             <button
               type="button"
-              className="h-[40px] px-4 flex items-center gap-[8px] bg-[#067656]/[0.75] border border-black/60 rounded-[39px] hover:bg-[#067656] transition-colors"
+              className="h-[40px] px-4 flex items-center gap-[8px] bg-[#067656]/[0.75] border border-black/60 rounded-[39px] hover:bg-[#067656] transition-colors cursor-pointer"
             >
               <span className="font-outfit font-semibold text-[14px] text-white">Our Product</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -79,13 +99,8 @@ export default function HeroSection() {
 
         </div>
 
-        {/* 
-          BAGONG PESTO NG KAHON: Naka-absolute na ito para mailagay natin sa gitna.
-          - `lg:absolute`: Gagana lang ang absolute positioning sa desktop screen.
-          - `lg:right-[15%] lg:top-[50%] lg:-translate-y-1/2`: Inilagay sa gitnang-kanang bahagi para pumasok sa blangkong espasyo.
-        */}
+        {/* 3D Animation Box Glassmorphism */}
         <div className="mt-10 lg:mt-0 w-full lg:w-auto lg:absolute lg:right-[28%] lg:top-[100%] lg:-translate-y-1/2 flex justify-center items-center">
-          {/* Napanatili ang styling ng iyong glassmorphism box */}
           <div className="w-full sm:w-[340px] aspect-[4/3] border border-white/10 rounded-[24px] bg-white/5 backdrop-blur-md flex items-center justify-center p-4 shadow-xl">
             <span className="text-white/30 text-[12px] font-medium tracking-wide text-center">
               [ ILAGAY ANG IYONG 3D ANIMATION DITO ]

@@ -10,29 +10,7 @@ export default function HeroSection() {
     <section className="relative min-h-[65vh] bg-[#067656] text-white pt-24 pb-10 overflow-hidden flex items-center">
       <Navbar />
 
-      {/* 
-        ========================================================================
-        KUNEHO MULA SA CLOUDINARY (BACKGROUND LAYER)
-        - `z-0`: Inilalagay nito ang kuneho sa pinakalikod ng mga teksto.
-        - `pointer-events-none`: Para hindi nito maharangan ang pag-click sa mga button.
-        - Palitan ang `YOUR_CLOUD_NAME` at `your-bunny-asset-id` ng tunay mong Cloudinary details.
-        ========================================================================
-      */}
-      <div className="absolute left-[8%] md:left-[12%] top-[25%] md:top-[20%] z-0 pointer-events-none w-[280px] sm:w-[350px] md:w-[420px] aspect-square opacity-80">
-        <Image
-          src="https://res.cloudinary.com/nresxj0f/image/upload/v1792920525/bunny1.png"
-          alt="Cloudinary Bunny Background"
-          fill
-          priority
-          sizes="(max-w-768px) 280px, (max-w-1024px) 350px, 420px"
-          className="object-contain object-left-top"
-        />
-      </div>
-
-      {/* 
-        TEXT AT CONTENT LAYER
-        - Tinaasan natin ang `z-index` papuntang `z-10` para siguradong nakalutang sa harap ng kuneho.
-      */}
+      {/* TEXT AT CONTENT LAYER */}
       <div className="relative mx-auto w-full max-w-[1200px] px-12 z-10">
         
         {/* KALIWANG BAHAGI: Teksto at Buttons */}
@@ -99,12 +77,21 @@ export default function HeroSection() {
 
         </div>
 
-        {/* 3D Animation Box Glassmorphism */}
+        {/* 
+          BUNNY IMAGE LAYER (PUMALIT SA 3D ANIMATION BOX)
+          - Kinuha ang eksaktong posisyon ng 3D box para doon lumitaw ang kuneho.
+          - Gumamit ng `object-contain` para hindi mapitpit ang graphics ng character mo.
+        */}
         <div className="mt-10 lg:mt-0 w-full lg:w-auto lg:absolute lg:right-[28%] lg:top-[100%] lg:-translate-y-1/2 flex justify-center items-center">
-          <div className="w-full sm:w-[340px] aspect-[4/3] border border-white/10 rounded-[24px] bg-white/5 backdrop-blur-md flex items-center justify-center p-4 shadow-xl">
-            <span className="text-white/30 text-[12px] font-medium tracking-wide text-center">
-              [ ILAGAY ANG IYONG 3D ANIMATION DITO ]
-            </span>
+          <div className="w-[140px] sm:w-[380px] md:w-[390px] h-[450px] relative flex items-center justify-center">
+            <Image
+              src="https://res.cloudinary.com/nresxj0f/image/upload/v1792920525/bunny1.png"
+              alt="Manipu Bunny Character"
+              fill
+              priority
+              sizes="(max-w-768px) 280px, (max-w-1024px) 480px, 520px"
+              className="object-contain"
+            />
           </div>
         </div>
 

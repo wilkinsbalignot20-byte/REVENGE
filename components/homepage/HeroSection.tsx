@@ -96,6 +96,67 @@ export default function HeroSection() {
         </div>
 
       </div>
+
+      {/* 
+        ========================================================================
+        SKELETON-STYLE GAMING STATS PANEL (WHITE & TRANSPARENT ONLY)
+        - `absolute right-12 top-28`: Inilagay sa itaas na bahagi sa ibaba ng /SIDEKICK.
+        - Purong nakalutang na white text at bars nang walang black bounding container.
+        ========================================================================
+      */}
+      <div className="hidden md:flex absolute right-29 top-28 flex-col gap-4 font-mono text-[11px] select-none z-20 tracking-wider w-[180px]">
+        
+        {/* Header Section */}
+        <div className="flex justify-between items-end border-b border-white/20 pb-1">
+          <span className="text-white/60 text-[10px] uppercase tracking-widest">Fighter</span>
+          <span className="text-white font-bold text-[11px]">Class <span className="font-sans font-black text-white">S</span></span>
+        </div>
+
+        {/* DIFFICULTY STAT */}
+        <div>
+          <div className="flex justify-between text-white uppercase mb-1 text-[11px] font-medium">
+            <span>Difficulty</span>
+            <span className="font-bold">260</span>
+          </div>
+          <div className="h-[2px] bg-white/20 w-full relative">
+            <div className="h-full bg-white w-[85%]" />
+          </div>
+        </div>
+
+        {/* AURA STAT */}
+        <div>
+          <div className="flex justify-between text-white uppercase mb-1 text-[11px] font-medium">
+            <span>Aura</span>
+            <span className="font-bold">80</span>
+          </div>
+          <div className="h-[2px] bg-white/20 w-full relative">
+            <div className="h-full bg-white w-[40%]" />
+          </div>
+        </div>
+
+        {/* STANDARD STAT */}
+        <div>
+          <div className="flex justify-between text-white uppercase mb-1 text-[11px] font-medium">
+            <span>Standard</span>
+            <span className="font-bold">150</span>
+          </div>
+          <div className="h-[2px] bg-white/20 w-full relative">
+            <div className="h-full bg-white w-[65%]" />
+          </div>
+        </div>
+
+        {/* QUALITY STAT */}
+        <div>
+          <div className="flex justify-between text-white uppercase mb-1 text-[11px] font-medium">
+            <span>Quality</span>
+            <span className="font-bold">220</span>
+          </div>
+          <div className="h-[2px] bg-white/20 w-full relative">
+            <div className="h-full bg-white w-[75%]" />
+          </div>
+        </div>
+      </div>
+
     </section>
   );
 }

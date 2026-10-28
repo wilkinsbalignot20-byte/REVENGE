@@ -7,19 +7,19 @@ import {
   MOUSE_SMOOTHING,
   SCROLL_SPEED,
   WALL_DISTANCE,
+  HOME_URL, // Isinama natin ang HOME_URL galing sa constants
 } from './constants'
 import { createCards, updateCards } from './cards'
 import { lerp } from './math'
 import { createOverlay } from './overlay'
 
 /**
- * Sine-setup ang buong WebGL scene sa loob ng ibinigay na canvas.
- * Optimized para sa iyong sariling brand at mabilis na Cloudinary asset delivery!
+ * WebGL Tunnel Scene setup.
+ * Ang "GO HOME" button ay direktang nakaturo na ngayon sa iyong itinakdang HOME_URL!
  */
 export const createTunnelScene = (canvas: HTMLCanvasElement, onHomeClick: () => void) => {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
   
-  // Ligtas na type-check para sa device pixel ratio
   const pixelRatio = typeof window !== 'undefined' ? Math.min(window.devicePixelRatio || 1, 2) : 1
   renderer.setPixelRatio(pixelRatio)
   renderer.setSize(window.innerWidth, window.innerHeight)
@@ -69,14 +69,19 @@ export const createTunnelScene = (canvas: HTMLCanvasElement, onHomeClick: () => 
   }
 
   const handleWheel = (event: WheelEvent) => {
-    event.preventDefault() // Pinigilan ang default scroll para sumunod sa bilis ng 3D camera
+    event.preventDefault()
     state.velocity += event.deltaY * SCROLL_SPEED
   }
 
   const handleClick = () => {
-    // Mas mabilis at swabe na pagbabalik sa home gamit ang Next.js Router handler
-    if (buttonHovered && onHomeClick) {
-      onHomeClick()
+    // Kung ang link ay panlabas (external URL), gagamit ng window.location.href.
+    // Kung ito naman ay lokal, gagamitin ang Next.js handler para sa mabilis na transition.
+    if (buttonHovered) {
+      if (HOME_URL.startsWith('http://') || HOME_URL.startsWith('https://')) {
+        window.location.href = HOME_URL
+      } else if (onHomeClick) {
+        onHomeClick()
+      }
     }
   }
 
@@ -86,7 +91,6 @@ export const createTunnelScene = (canvas: HTMLCanvasElement, onHomeClick: () => 
     renderer.setSize(window.innerWidth, window.innerHeight)
   }
 
-  // Mas maayos na event bindings — inilipat ang wheel sa mismong canvas para iwas lag sa mobile/browser
   window.addEventListener('pointermove', handlePointerMove, { passive: true })
   window.addEventListener('pointerleave', resetPointer)
   window.addEventListener('blur', resetPointer)
@@ -124,7 +128,6 @@ export const createTunnelScene = (canvas: HTMLCanvasElement, onHomeClick: () => 
 
   frameId = requestAnimationFrame(tick)
 
-  // Kumpletong taga-linis para iwas memory leak kapag lumipat ng page ang user sa iyong portfolio
   return function dispose() {
     cancelAnimationFrame(frameId)
     window.removeEventListener('pointermove', handlePointerMove)

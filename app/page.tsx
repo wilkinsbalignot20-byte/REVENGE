@@ -8,15 +8,15 @@ import MoreSections from "@/components/homepage/MoreSections";
 
 export default function Home() {
   return (
-    <ScrollProvider> {/* 2. Ibalot sa pinaka-labas */}
+    <ScrollProvider> 
       <ScaleFrame>
-        {/* Pagkakasunod: glow/content -> curve + pills -> hero text */}
+        
         <ContentSection />
         <FlowPath />
         <HeroSection />
       </ScaleFrame>
 
-      {/* Mga bagong section sa ilalim ng hero */}
+      
       <MoreSections />
     </ScrollProvider>
   );

@@ -1,0 +1,209 @@
+/* Lahat ng class ay may "mg-" prefix para hindi makaapekto sa ibang pages. */
+.mg-root {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  font-family: var(--font-inter), Inter, Arial, sans-serif;
+  color-scheme: dark;
+}
+.mg-root * { box-sizing: border-box; }
+.mg-root a { color: inherit; text-decoration: none; }
+.mg-root a:hover { opacity: 0.65; }
+.mg-root a:focus-visible { outline: 1px solid #fff; outline-offset: 5px; }
+
+.mg-stage {
+  position: absolute;
+  width: var(--stage-width, 100vw);
+  height: 1080px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(var(--stage-scale, 1));
+  overflow: hidden;
+  background-color: #000;
+  isolation: isolate;
+}
+
+/* Glow sa taas (CSS gradient na lang, walang external svg) */
+.mg-glow {
+  position: absolute;
+  left: calc(50% - 534px);
+  top: -454px;
+  width: 1068px;
+  height: 1548px;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 50% 50% at 50% 38%,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.55) 30%,
+    rgba(255, 255, 255, 0.15) 55%,
+    rgba(255, 255, 255, 0) 75%
+  );
+}
+
+.mg-wordmark {
+  position: absolute;
+  z-index: 8;
+  left: 50%;
+  bottom: 0;
+  width: 98%;
+  aspect-ratio: 1888 / 377;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.mg-wordmark svg { display: block; width: 100%; height: 100%; }
+
+.mg-bottom-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgb(0 0 0 / 0.04) 55%,
+    rgb(0 0 0 / 0.12) 68%,
+    rgb(0 0 0 / 0.26) 80%,
+    rgb(0 0 0 / 0.46) 91%,
+    rgb(0 0 0 / 0.65) 100%
+  );
+}
+
+.mg-noise {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: soft-light;
+  background-size: 128px 128px;
+}
+
+.mg-app { position: absolute; inset: 0; z-index: 11; touch-action: none; }
+.mg-conveyor {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(20px 32px 28px rgb(0 0 0 / 0.56));
+}
+
+.mg-project-links { position: absolute; inset: 0; pointer-events: none; }
+.mg-project-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  pointer-events: auto;
+}
+.mg-project-link:focus-visible {
+  clip-path: none;
+  width: auto;
+  height: auto;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  padding: 12px 18px;
+  background: #141414;
+  white-space: nowrap;
+}
+.mg-project-link:focus-visible img { display: none; }
+
+/* Fallback kapag walang WebGL: simpleng grid */
+.mg-app.is-fallback { overflow-y: auto; touch-action: pan-y; padding: 100px 24px 60px; }
+.is-fallback .mg-conveyor { display: none; }
+.is-fallback .mg-project-links {
+  position: static;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 24px;
+}
+.is-fallback .mg-project-link {
+  position: static;
+  width: auto;
+  height: auto;
+  clip-path: none;
+}
+.is-fallback .mg-project-link:focus-visible { transform: none; white-space: normal; }
+.is-fallback .mg-project-link img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+}
+.is-fallback .mg-project-link span { display: block; padding-top: 8px; font-size: 14px; }
+
+.mg-agency {
+  color: rgb(255 255 255 / 0.55);
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  z-index: 20;
+  width: 300px;
+  font-size: 16px;
+  line-height: 22px;
+}
+.mg-agency p { margin: 0; }
+.mg-agency .mg-since { padding-left: 110px; }
+
+.mg-socials {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 16px;
+  line-height: 19px;
+}
+.mg-socials span { opacity: 0.4; }
+.mg-socials a {
+  position: relative;
+  color: rgb(255 255 255 / 0.55);
+  transition: color 220ms ease;
+}
+.mg-socials a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 260ms ease;
+}
+.mg-socials a:hover,
+.mg-socials a:focus-visible { color: rgb(255 255 255 / 0.9); opacity: 1; }
+.mg-socials a:hover::after,
+.mg-socials a:focus-visible::after { transform: scaleX(1); transform-origin: left center; }
+
+.mg-status {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  z-index: 30;
+  margin: 0;
+  font-size: 14px;
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mg-socials a, .mg-socials a::after { transition: none; }
+}
+@media (max-width: 700px) {
+  .mg-conveyor { filter: drop-shadow(8px 14px 12px rgb(0 0 0 / 0.5)); }
+  .mg-agency, .mg-socials { font-size: 12px; line-height: 18px; }
+  .mg-agency { left: 12px; width: 220px; }
+  .mg-agency .mg-since { padding-left: 80px; }
+  .mg-socials { right: 12px; gap: 8px; }
+}
+@media (max-width: 520px) {
+  .mg-socials { top: 64px; left: 12px; right: auto; }
+}

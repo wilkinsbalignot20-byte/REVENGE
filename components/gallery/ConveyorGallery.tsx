@@ -1,3 +1,11 @@
+/*
+  MIT License
+  Copyright (c) Shakuro (shakuro.com)
+  
+  Original UI/UX and Gallery Animation concept inspired by Shakuro.
+  Adapted for Next.js and TypeScript project.
+*/
+
 "use client";
 
 import { useEffect, useRef } from "react";

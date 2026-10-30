@@ -1,3 +1,12 @@
+/*
+  MIT License
+  Copyright (c) Shakuro (shakuro.com)
+  
+  Original "404 Photo Tunnel" Design and WebGL Animation by Shakuro.
+  Created for Per Appelgren Portfolio.
+  Ported and adapted for Next.js and TypeScript.
+*/
+
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";

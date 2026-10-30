@@ -1,3 +1,12 @@
+/*
+  Original WebGL Gallery Animation logic by Shakuro (shakuro.com)
+  Ported to TypeScript for Next.js application.
+  Distributed under the MIT License.
+*/
+
+// ... ang code mo ng webgl dito
+
+
 import type { Project } from "./projects";
 
 export type Motion = {
@@ -285,7 +294,8 @@ export function createConveyor(
   gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, geometry.indices, gl.STATIC_DRAW);
 
   // Pinagsasama ang lahat ng larawan sa isang atlas texture.
-  const columns = Math.ceil(Math.sqrt(projects.length * 0.75));
+// Gumagamit ng malinis na math para sa 4x2 matrix kapag 8 ang projects
+  const columns = projects.length === 8 ? 4 : Math.ceil(Math.sqrt(projects.length * 0.75));
   const rows = Math.ceil(projects.length / columns);
   const maxSize = Math.min(4096, gl.getParameter(gl.MAX_TEXTURE_SIZE));
   const tileWidth =

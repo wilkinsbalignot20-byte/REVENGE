@@ -18,12 +18,12 @@ export function cldUrl(publicId: string): string {
 // PALITAN ang publicId at url ng totoong Manipu projects mo.
 // Kapag walang larawan, may text tile na lalabas kaya hindi mag-crash ang page.
 export const projects: Project[] = [
-  { id: "1", title: "Storefront", url: "/", publicId: "manipu/project-1" },
-  { id: "2", title: "Merchant Dashboard", url: "/", publicId: "manipu/project-2" },
-  { id: "3", title: "Community Forum", url: "/", publicId: "manipu/project-3" },
-  { id: "4", title: "Checkout", url: "/", publicId: "manipu/project-4" },
+  { id: "1", title: "Storefront", url: "/", publicId: "image2" },
+  { id: "2", title: "Merchant Dashboard", url: "/", publicId: "image3" },
+  { id: "3", title: "Community Forum", url: "/", publicId: "sit2" },
+  { id: "4", title: "Checkout", url: "/", publicId: "sit" },
   { id: "5", title: "Product Page", url: "/projects/product-page", publicId: "acc" },
-  { id: "6", title: "Seller Profile", url: "/", publicId: "manipu/project-6" },
-  { id: "7", title: "Landing Page", url: "/", publicId: "manipu/project-7" },
-  { id: "8", title: "Mobile View", url: "/", publicId: "manipu/project-8" },
+  { id: "6", title: "Seller Profile", url: "/", publicId: "power" },
+  { id: "7", title: "Landing Page", url: "/", publicId: "work" },
+  { id: "8", title: "Mobile View", url: "/", publicId: "Frame_1" },
 ];

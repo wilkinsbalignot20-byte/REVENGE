@@ -1,9 +1,10 @@
 /*
   MIT License
-  Copyright (c) Shakuro (shakuro.com)
+  Original "404 Photo Tunnel" Concept & Animation by Shakuro (shakuro.com)
   
-  Original UI/UX and Gallery Animation concept inspired by Shakuro.
-  Adapted for Next.js and TypeScript project.
+  Modified and Improved by: [Iyong Pangalan]
+  - Ported from vanilla HTML/JS to Next.js & TypeScript
+  - Refactored code structure, fixed performance issues, and optimized for React
 */
 
 "use client";
